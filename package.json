@@ -24,7 +24,7 @@
   "author": {
     "name": "Jimmy Ilenloa"
   },
-  "homepage": "https://github.com/laravel/echo",
+  "homepage": "https://github.com/jilenloa/laravel-echo-connector-socketcluster",
   "engines": {
     "node": ">=8"
   },

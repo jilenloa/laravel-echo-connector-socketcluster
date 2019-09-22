@@ -1,6 +1,6 @@
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-echo.svg"></p>
 
-##Usage
+## Usage
 
 This package requires the latest laravel-echo package to function.
 
