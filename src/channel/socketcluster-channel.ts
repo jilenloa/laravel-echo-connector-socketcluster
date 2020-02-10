@@ -149,7 +149,7 @@ export class SocketClusterChannel extends Channel {
         })();
 
         //this.socket.on('connect', listener);
-        //this.bind('connect', listener);
+        this.bind('connect', listener);
     }
 
     /**
