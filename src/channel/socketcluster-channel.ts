@@ -64,13 +64,18 @@ export class SocketClusterChannel extends Channel {
                 auth: authParams
             }
         });
-        this.channelObject.watch(data => {
-            if(typeof this.events[data.event] !== typeof undefined){
-                this.events[data.event].forEach(callback => {
-                    callback(data.data);
-                });
+
+        (async () => {
+            for await (let data of (this.channelObject as any)) {
+                // ... Handle channel data.
+                if(typeof this.events[data.event] !== typeof undefined){
+                    this.events[data.event].forEach(callback => {
+                        callback(data.data);
+                    });
+                }
             }
-        });
+        })();
+
     }
 
     getFullAuthEndpoint(){
@@ -90,7 +95,6 @@ export class SocketClusterChannel extends Channel {
         this.unbind();
         this.channelObject.unwatch();
         this.socket.unsubscribe(this.name);
-        this.socket.destroyChannel(this.name);
     }
 
     /**

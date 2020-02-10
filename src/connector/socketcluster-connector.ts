@@ -32,8 +32,8 @@ export class SocketClusterConnector extends Connector {
      * Get socket.io module from global scope or options.
      */
     getSocketCluster(): any {
-        if (typeof socketCluster !== 'undefined') {
-            return socketCluster;
+        if (typeof socketClusterClient !== 'undefined') {
+            return socketClusterClient;
         }
 
         if (typeof this.options.client !== 'undefined') {

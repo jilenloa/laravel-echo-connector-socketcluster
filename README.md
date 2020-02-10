@@ -9,12 +9,16 @@ This package requires the latest laravel-echo package to function.
     
     let echo = new Echo({
           broadcaster: SocketClusterConnector,
-          key: 'your-pusher-key',
+          //key: 'your-pusher-key',
           auth: {
             headers: {
-            }
+            },
+            hostname: 'localhost:8001', //optional
           },
-          socketcluster: this.socketClusterOptions
+          socketcluster: {
+                hostname: 'localhost',
+                port: 8001
+            }
         });
 
 ## Introduction
