@@ -125,7 +125,7 @@ export class SocketClusterChannel extends Channel {
         };
 
         // this.socket.on(event, listener);
-        this.channelObject.on(event, listener);
+        // this.channelObject.on(event, listener);
         this.bind(event, listener);
     }
 
