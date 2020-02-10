@@ -141,8 +141,15 @@ export class SocketClusterChannel extends Channel {
             this.subscribe();
         };
 
-        this.socket.on('connect', listener);
-        this.bind('connect', listener);
+        (async () => {
+            for await (let event of (this.socket as any).listener('connect')) {
+                console.log('Socket is connected');
+                listener();
+            }
+        })();
+
+        //this.socket.on('connect', listener);
+        //this.bind('connect', listener);
     }
 
     /**
