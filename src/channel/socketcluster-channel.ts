@@ -93,7 +93,7 @@ export class SocketClusterChannel extends Channel {
      */
     unsubscribe(): void {
         this.unbind();
-        this.channelObject.unwatch();
+        //this.channelObject.unwatch();
         this.socket.unsubscribe(this.name);
     }
 
@@ -110,7 +110,7 @@ export class SocketClusterChannel extends Channel {
      */
     stopListening(event: string): SocketClusterChannel {
         const name = this.eventFormatter.format(event);
-        this.channelObject.off(name);
+        //this.channelObject.off(name);
         delete this.events[name];
 
         return this;
@@ -143,7 +143,7 @@ export class SocketClusterChannel extends Channel {
 
         (async () => {
             for await (let event of (this.socket as any).listener('connect')) {
-                console.log('Socket is connected');
+                //console.log('Socket is connected');
                 listener();
             }
         })();
@@ -166,7 +166,7 @@ export class SocketClusterChannel extends Channel {
     unbind(): void {
         Object.keys(this.events).forEach(event => {
             this.events[event].forEach(callback => {
-                this.channelObject.off(event, callback);
+                // this.channelObject.off(event, callback);
             });
 
             delete this.events[event];
