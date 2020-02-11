@@ -1,6 +1,6 @@
 {
   "name": "laravel-echo-connector-socketcluster",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Laravel Echo Connector library for beautiful SocketCluster integration",
   "main": "dist/echo-connector-socketcluster.common.js",
   "types": "dist/echo-connector-socketcluster.d.ts",
