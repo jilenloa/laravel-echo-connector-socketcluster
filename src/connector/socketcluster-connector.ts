@@ -9,7 +9,7 @@ import {SCClientSocket} from "socketcluster-client";
 /**
  * This class creates a connnector to a SocketCluster server.
  */
-export class SocketClusterConnector extends Connector {
+export class SocketClusterConnector {
     /**
      * The SocketCluster connection instance.
      */
@@ -19,6 +19,78 @@ export class SocketClusterConnector extends Connector {
      * All of the subscribed channel names.
      */
     channels: {[id: string]: any} = {};
+
+    /**
+     * Default connector options.
+     */
+    private _defaultOptions: any = {
+        auth: {
+            headers: {},
+        },
+        authEndpoint: '/broadcasting/auth',
+        broadcaster: 'pusher',
+        csrfToken: null,
+        host: null,
+        key: null,
+        namespace: 'App.Events',
+    };
+
+    /**
+     * Connector options.
+     */
+    options: any;
+
+    /**
+     * Create a new class instance.
+     */
+    constructor(options: any) {
+        // when options is empty, constructor is being tested using isConstructor in Echo
+        if(options){
+            this.setOptions(options);
+            this.connect();
+        }
+    }
+
+    /**
+     * Merge the custom options with the defaults.
+     */
+    protected setOptions(options: any): any {
+        this.options = Object.assign(this._defaultOptions, options);
+
+        if (this.csrfToken()) {
+            if(typeof this.options.auth === typeof undefined){
+                this.options["auth"] = {
+                    headers: {
+                        'X-CSRF-TOKEN':''
+                    }
+                }
+            }else if(typeof this.options.auth.headers === typeof undefined){
+                this.options.auth["headers"] = {
+                    'X-CSRF-TOKEN':''
+                }
+            }
+            this.options.auth.headers['X-CSRF-TOKEN'] = this.csrfToken();
+        }
+
+        return options;
+    }
+
+    /**
+     * Extract the CSRF token from the page.
+     */
+    protected csrfToken(): string {
+        let selector;
+
+        if (typeof window !== 'undefined' && window['Laravel'] && window['Laravel'].csrfToken) {
+            return window['Laravel'].csrfToken;
+        } else if (this.options.csrfToken) {
+            return this.options.csrfToken;
+        } else if (typeof document !== 'undefined' && (selector = document.querySelector('meta[name="csrf-token"]'))) {
+            return selector.getAttribute('content');
+        }
+
+        return null;
+    }
 
     /**
      * Create a fresh SocketCluster connection.
