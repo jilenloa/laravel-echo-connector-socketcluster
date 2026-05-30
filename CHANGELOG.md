@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [0.0.12](https://github.com/jilenloa/laravel-echo-connector-socketcluster/compare/v0.0.13...v0.0.12) (2026-05-30)
 
+### [0.0.12](https://github.com/jilenloa/laravel-echo-connector-socketcluster/compare/v0.0.13...v0.0.12) (2026-05-30)
+
 ### [0.0.13](https://github.com/jilenloa/laravel-echo-connector-socketcluster/compare/v0.0.12...v0.0.13) (2026-05-30)
 
 ### [0.0.12](https://github.com/laravel/echo/compare/v0.0.11...v0.0.12) (2026-05-30)
